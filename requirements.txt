@@ -1,4 +1,21 @@
 numpy
 pandas
+scipy
+scikit-learn
+matplotlib
 seaborn
+plotly
+pyyaml
+tqdm
+joblib
+statsmodels
+imbalanced-learn
+mlflow
+fastapi
+uvicorn
+pytest
+black
+jupyter
+catboost
+xgboost
 -e .
