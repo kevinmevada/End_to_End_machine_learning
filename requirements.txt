@@ -18,4 +18,5 @@ black
 jupyter
 catboost
 xgboost
+dill
 -e .
