@@ -1,1 +1,26 @@
-<h1>Welcome to the Home page MF<h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Performance Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Student Performance Predictor</h1>
+
+    <p class="subtitle">
+      AI-powered estimation of student math performance using academic
+      and demographic factors.
+    </p>
+
+    <a href="/predictdata" class="btn-primary">Start Prediction</a>
+
+    <div class="footer">
+      Built with Machine Learning · Flask · Python
+    </div>
+  </div>
+</body>
+</html>
