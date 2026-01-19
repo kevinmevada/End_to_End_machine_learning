@@ -1,6 +1,7 @@
 import os
 import sys
 import pandas as pd
+from pathlib import Path
 
 from src.exception import CustomException
 from src.utils import load_object
@@ -12,10 +13,19 @@ class PredictPipeline:
     
     def predict(self,features):
         try:
-            model_path = os.path.join('artifacts', 'model.pkl')
-            preprocessor_path = os.path.join('artifacts', 'preprocessor.pkl')
-            model=load_object(file_path=model_path)
-            preprocessor=load_object(file_path=preprocessor_path)
+            project_root = Path(__file__).resolve().parents[2]
+            artifacts_dir = project_root / "artifacts"
+
+            model_path = artifacts_dir / "model.pkl"
+            preprocessor_path = artifacts_dir / "preprocessor.pkl"
+
+            if not model_path.exists():
+                raise FileNotFoundError(f"Model file not found at: {model_path}")
+            if not preprocessor_path.exists():
+                raise FileNotFoundError(f"Preprocessor file not found at: {preprocessor_path}")
+
+            model=load_object(file_path=str(model_path))
+            preprocessor=load_object(file_path=str(preprocessor_path))
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
             

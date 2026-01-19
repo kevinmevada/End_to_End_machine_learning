@@ -6,7 +6,6 @@ import dill
 from src.exception import CustomException
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
-from catboost import CatBoostRegressor
 
 
 def save_object(file_path,obj):
@@ -32,11 +31,16 @@ def evaluate_models(
     try:
         report = {}
 
+        try:
+            from catboost import CatBoostRegressor
+        except Exception:
+            CatBoostRegressor = None
+
         for model_name, model in models.items():
             param_grid = params.get(model_name, {})
 
-            # 🚫 DO NOT use GridSearchCV for CatBoost
-            if isinstance(model, CatBoostRegressor):
+            # DO NOT use GridSearchCV for CatBoost
+            if CatBoostRegressor is not None and isinstance(model, CatBoostRegressor):
                 model.fit(X_train, y_train, verbose=False)
 
             else:

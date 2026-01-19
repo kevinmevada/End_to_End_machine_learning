@@ -1,4 +1,6 @@
+import os
 from flask import Flask, request, render_template
+
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 
 application = Flask(__name__)
@@ -35,8 +37,9 @@ def predict_datapoint():
             )
         except Exception as e:
             return render_template('home.html', form_data={}, error=str(e))
-    
+
     return render_template('home.html', form_data={})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
